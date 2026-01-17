@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generazioni Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="bg-[#f4f1ea] text-slate-800 font-['Nunito'] overflow-x-hidden">
+
+    <div class="min-h-screen flex items-center justify-center p-4 relative">
+        
+        <div class="w-full max-w-2xl bg-white border-4 border-slate-900 rounded-3xl shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] p-6 md:p-10 transition-all duration-300 relative overflow-hidden" id="main-card">
+            
+            <div id="start-screen" class="text-center py-6">
+                <span class="bg-yellow-300 border-2 border-black px-3 py-1 rounded-full text-xs font-black tracking-widest uppercase mb-4 inline-block shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    Test Psicologico
+                </span>
+                <h1 class="text-5xl md:text-6xl font-['Fredoka'] font-bold text-slate-900 mb-6 leading-tight">
+                    Dimmi come vivi...
+                </h1>
+                <p class="text-slate-600 mb-8 text-xl font-bold leading-relaxed max-w-lg mx-auto">
+                    ...e ti dirò a che generazione appartieni davvero! 
+                    <br><span class="text-sm font-normal text-slate-500">(Senza chiedere l'anno di nascita!)</span>
+                </p>
+                <button onclick="startQuiz()" class="transform hover:-translate-y-1 transition-transform inline-block bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-['Fredoka'] text-2xl font-semibold py-4 px-10 rounded-2xl border-b-4 border-red-800 shadow-lg">
+                    VAI COL TEST! 🚀
+                </button>
+            </div>
+
+            <div id="quiz-screen" class="hidden">
+                <div class="mb-6">
+                    <div class="flex justify-between items-end text-slate-500 font-bold mb-2">
+                        <span class="font-['Fredoka'] text-lg">Domanda <span id="q-number" class="text-indigo-600 text-xl">1</span></span>
+                    </div>
+                    <div class="h-4 w-full bg-slate-200 rounded-full border-2 border-slate-900 overflow-hidden relative">
+                        <div id="progress-bar" class="h-full bg-yellow-400 border-r-2 border-slate-900 w-0 transition-all duration-500 ease-out absolute top-0 left-0"></div>
+                        <div class="w-full h-full absolute top-0 left-0 opacity-20 bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAKrVq36zwjjgzhhYWGMYAEYB8RmROaABADeOQ8CXl/xfgAAAABJRU5ErkJggg==')]"></div>
+                    </div>
+                </div>
+
+                <h2 id="question-text" class="text-2xl md:text-3xl font-['Fredoka'] font-semibold text-slate-800 mb-8 min-h-[4rem] leading-snug">
+                    ...
+                </h2>
+
+                <div id="answers-container" class="grid gap-3">
+                    </div>
+            </div>
+
+            <div id="result-screen" class="hidden animate-bounce-in">
+                
+                <div class="text-center mb-8">
+                    <p class="text-slate-400 font-bold uppercase tracking-widest text-sm mb-2">Risultato</p>
+                    <h2 id="result-title" class="text-4xl md:text-5xl font-['Fredoka'] font-bold text-slate-900 mb-4">
+                        </h2>
+                    <p class="text-slate-600 text-lg font-medium bg-slate-100 p-4 rounded-xl border-2 border-slate-200 inline-block mb-6" id="result-desc">
+                        </p>
+                </div>
+
+                <div class="relative pt-4 pb-2 px-2 bg-slate-50 rounded-2xl border-2 border-slate-200">
+                    <h3 class="text-center font-['Fredoka'] text-slate-400 text-sm mb-4 uppercase">La linea del tempo</h3>
+                    
+                    <div class="flex flex-col gap-2 relative">
+                        
+                        <div class="hidden md:flex absolute -left-16 top-0 bottom-0 w-12 bg-slate-700 items-center justify-center rounded-l-lg" style="clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0% 100%, 0% 20%, 50% 0%);">
+                           <span class="text-white font-bold tracking-widest -rotate-90 whitespace-nowrap text-xs">GENERAZIONI</span> 
+                        </div>
+
+                        <div id="arrow-boomer" class="gen-arrow bg-[#e85d4e] border-b-4 border-[#c0392b]">
+                            <div class="flex justify-between items-center z-10 relative">
+                                <div>
+                                    <span class="block font-['Fredoka'] text-white text-xl md:text-2xl uppercase font-bold text-shadow">Baby Boomers</span>
+                                    <span class="text-white/90 text-xs md:text-sm font-bold">1946 – 1964</span>
+                                </div>
+                                <span class="text-3xl">👴</span>
+                            </div>
+                        </div>
+
+                        <div id="arrow-genx" class="gen-arrow bg-[#6ab04c] border-b-4 border-[#4a8a2a]">
+                             <div class="flex justify-between items-center z-10 relative">
+                                <div>
+                                    <span class="block font-['Fredoka'] text-white text-xl md:text-2xl uppercase font-bold text-shadow">Generation X</span>
+                                    <span class="text-white/90 text-xs md:text-sm font-bold">1965 – 1980</span>
+                                </div>
+                                <span class="text-3xl">📼</span>
+                            </div>
+                        </div>
+
+                        <div id="arrow-millennial" class="gen-arrow bg-[#2980b9] border-b-4 border-[#1c5a85]">
+                             <div class="flex justify-between items-center z-10 relative">
+                                <div>
+                                    <span class="block font-['Fredoka'] text-white text-xl md:text-2xl uppercase font-bold text-shadow">Millennials</span>
+                                    <span class="text-white/90 text-xs md:text-sm font-bold">1981 – 1996</span>
+                                </div>
+                                <span class="text-3xl">📱</span>
+                            </div>
+                        </div>
+
+                        <div id="arrow-genz" class="gen-arrow bg-[#8e44ad] border-b-4 border-[#6c3483]">
+                             <div class="flex justify-between items-center z-10 relative">
+                                <div>
+                                    <span class="block font-['Fredoka'] text-white text-xl md:text-2xl uppercase font-bold text-shadow">Gen Z</span>
+                                    <span class="text-white/90 text-xs md:text-sm font-bold">1997 – 2012</span>
+                                </div>
+                                <span class="text-3xl">🎧</span>
+                            </div>
+                        </div>
+                         <div class="gen-arrow bg-[#f39c12] border-b-4 border-[#d35400] opacity-50 grayscale">
+                            <div class="flex justify-between items-center z-10 relative">
+                               <div>
+                                   <span class="block font-['Fredoka'] text-white text-xl md:text-2xl uppercase font-bold text-shadow">Gen Alpha</span>
+                                   <span class="text-white/90 text-xs md:text-sm font-bold">2013 – ...</span>
+                               </div>
+                               <span class="text-3xl">👶</span>
+                           </div>
+                       </div>
+
+                    </div>
+                    
+                    <div class="mt-4 flex justify-between text-xs font-bold text-slate-400 border-t-2 border-slate-300 pt-2 border-dashed">
+                        <span>1940</span>
+                        <span>1980</span>
+                        <span>2000</span>
+                        <span>2024</span>
+                    </div>
+
+                </div>
+
+                <button onclick="restartQuiz()" class="mt-8 w-full bg-slate-800 text-white font-['Fredoka'] font-bold py-3 rounded-xl hover:bg-slate-700 transition-colors shadow-lg">
+                    RIFAI IL TEST 🔄
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

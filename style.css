@@ -1,0 +1,102 @@
+/* Ombreggiatura testo per renderlo leggibile sui colori */
+.text-shadow {
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+/* Stile base per le frecce */
+.gen-arrow {
+    position: relative;
+    padding: 1rem 1.5rem; /* Spazio interno paffuto */
+    padding-right: 3rem; /* Spazio per la punta */
+    color: white;
+    /* Creiamo la forma a freccia */
+    clip-path: polygon(
+        0% 0%, 
+        92% 0%, 
+        100% 50%, 
+        92% 100%, 
+        0% 100%
+    );
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effetto rimbalzo */
+    transform-origin: left center;
+    opacity: 0.6; /* Di base sono un po' spente */
+    filter: grayscale(0.4); /* E un po' grigie */
+}
+
+/* Quando una freccia è "ATTIVA" (Risultato) */
+.gen-arrow.active {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: scale(1.05) translateX(10px); /* Diventa più grande ed esce fuori */
+    z-index: 20;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); /* Non si vede con clip-path ma serve al layout */
+}
+
+/* Aggiungiamo il marcatore "TU SEI QUI" solo sulla freccia attiva */
+.gen-arrow.active::before {
+    content: 'TU SEI QUI!';
+    position: absolute;
+    right: 15%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-5deg);
+    background: white;
+    color: #1e293b;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 2px solid #1e293b;
+    box-shadow: 2px 2px 0 #1e293b;
+    z-index: 30;
+    animation: popIn 0.5s ease-out 0.5s both;
+}
+
+@keyframes popIn {
+    0% { transform: translateY(-50%) scale(0) rotate(0); }
+    80% { transform: translateY(-50%) scale(1.2) rotate(-10deg); }
+    100% { transform: translateY(-50%) scale(1) rotate(-5deg); }
+}
+
+/* Stile bottoni risposte "Chubby" */
+.answer-btn {
+    text-align: left;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem; /* Bordi molto tondi */
+    border: 3px solid #e2e8f0; 
+    background: white;
+    color: #475569;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 #cbd5e1; /* Effetto 3D "pulsante fisico" */
+    margin-bottom: 4px; /* Spazio per l'ombra */
+}
+
+.answer-btn:active {
+    transform: translateY(4px); /* Pressione fisica */
+    box-shadow: 0 0 0 #cbd5e1;
+}
+
+.answer-btn:hover {
+    border-color: #fbbf24; /* Giallo quando passi sopra */
+    color: #1e293b;
+}
+
+/* Animazione entrata schermata */
+.animate-bounce-in {
+    animation: bounceIn 0.8s;
+}
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 1; transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* Background stile "quaderno" */
+body {
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 20px 20px;
+}
